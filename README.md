@@ -27,7 +27,7 @@ P 与派生位置拷贝 D，并以复制前外群同源片段 P0 为祖先参考
 ## 目录结构
 
 ```text
-SD_benchmarking/
+AtSDEvo/
 ├── README.md
 ├── environment.yml
 ├── docs/
@@ -60,4 +60,3 @@ SD_benchmarking/
   P/D/P0 位点。
 
 P 不是比 D “更老的序列”；复制后的 P 和 D 分支经历了相同的时间。
-

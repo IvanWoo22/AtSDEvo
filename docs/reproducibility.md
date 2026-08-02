@@ -3,7 +3,7 @@
 代码仓库与大型分析数据目录分离。以下约定：
 
 ```bash
-CODE=/path/to/SD_benchmarking
+CODE=/path/to/AtSDEvo
 P=/path/to/TAIR12_outgroup_comparative_genomics
 export SD_PROJECT_ROOT="$P"
 export SD_AGE_FREE_ROOT="$P/15_age_free_pd_sequence_variation"
