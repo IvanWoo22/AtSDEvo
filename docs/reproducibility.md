@@ -8,10 +8,18 @@ conda activate atsdevo
 python workflow/00_environment/check_environment.py --scope downstream
 ```
 
-环境检查会明确报告缺失工具及其所属阶段。MCScanX 不在 Conda 环境文件中，需按
-官方仓库说明执行 `make`，再将 `MCScanX` 加入 `PATH`；BISER 1.4 在 Apple
-Silicon 上没有官方原生发行包，阶段 03 应在 Linux x86-64 环境运行。阶段 04
-之后可直接使用同步的 BISER 结果，不需要在本机重复运行 BISER。
+环境检查会明确报告缺失工具及其所属阶段。MCScanX 1.0.0 由 Bioconda 提供
+macOS arm64 原生包，已经纳入主环境。HCC 的 BISER 1.4 只提供 Linux x86-64
+构建，并要求 Python 3.12，不能在 macOS 上直接执行。阶段 03 应在 Linux x86-64
+环境运行：
+
+```bash
+conda env create -f environment-biser-linux.yml
+conda activate atsdevo-biser-linux
+biser --help
+```
+
+阶段 04 之后可直接使用同步的 BISER 结果，不需要在本机重复运行 BISER。
 
 环境创建完成后，设置代码与数据目录：
 

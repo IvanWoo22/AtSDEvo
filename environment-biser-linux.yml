@@ -1,0 +1,9 @@
+name: atsdevo-biser-linux
+channels:
+  - conda-forge
+  - bioconda
+  - hcc
+dependencies:
+  # HCC 的 BISER 1.4 构建仅支持 Linux x86-64，并要求 Python 3.12。
+  - python=3.12
+  - biser=1.4

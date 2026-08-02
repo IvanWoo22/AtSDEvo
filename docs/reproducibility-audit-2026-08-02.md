@@ -8,7 +8,7 @@
 - MAFFT 7.526、MUSCLE 5.3、PRANK 250331、IQ-TREE 3.1.3；
 - BLAST+ 2.16.0；
 - gffread 0.12.9、bedtools 2.31.1、samtools 1.24；
-- MCScanX：官方源码在本机编译通过；
+- MCScanX 1.0.0：Bioconda macOS arm64 原生包；
 - 测试数据：`DRMEGD/TAIR12_outgroup_comparative_genomics` 的写时复制副本。
 
 所有测试输出均写入临时数据副本，未覆盖权威结果目录。
@@ -61,4 +61,16 @@
 - 删除主流程未使用的 Biopython 依赖；
 - 修正 PRANK 在 `PATH` 中存在但被误判为缺失的问题；
 - 新增分范围环境检查，能够识别 MUSCLE 3.x 误用；
-- 明确 BISER 的平台限制以及 MCScanX 的源码安装方式。
+- 将 MCScanX 改为 Bioconda 原生依赖；
+- 为 HCC 的 Linux x86-64 BISER 1.4 增加独立环境文件。
+
+## Conda 包复核
+
+- Bioconda `mcscanx=1.0.0` 在独立 macOS arm64 环境中安装成功；可执行文件为
+  Mach-O arm64，并以最小 GFF 和 BLAST 输入完成真实运行、生成 collinearity 与
+  HTML 输出。
+- HCC `biser=1.4` 在 macOS arm64 求解时返回 `PackagesNotFoundInChannelsError`。
+  该包的唯一构建为 Linux x86-64 ELF，强制下载后在 macOS 执行返回状态 126
+  (`exec format error`)。因此它可用于 Linux 服务器或 `linux/amd64` 容器，不能
+  作为 macOS 原生依赖。`environment-biser-linux.yml` 已按 `linux-64` 完成 Conda
+  求解校验，能够解析到 HCC `biser=1.4=py312h06f12e4_0` 及其全部依赖。

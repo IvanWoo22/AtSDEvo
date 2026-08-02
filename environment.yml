@@ -1,5 +1,5 @@
 name: atsdevo
-# MCScanX 与 BISER 需按平台单独安装，详见 docs/reproducibility.md。
+# BISER 仅提供 Linux x86-64 构建，使用独立环境 environment-biser-linux.yml。
 channels:
   - conda-forge
   - bioconda
@@ -16,3 +16,4 @@ dependencies:
   - gffread
   - bedtools
   - samtools
+  - mcscanx=1.0.0

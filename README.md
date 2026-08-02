@@ -61,10 +61,11 @@ conda activate atsdevo
 python workflow/00_environment/check_environment.py --scope downstream
 ```
 
-`environment.yml`安装 Python 分析包、BLAST+、三种序列比对器、IQ-TREE、
-gffread、bedtools 与 samtools。MCScanX 需从官方源码编译；BISER 1.4 的 PyPI
-预编译包仅面向 Linux x86-64，Apple Silicon 上建议在 Linux 服务器或容器中运行
-阶段 03。已生成的 BISER calls 可直接用于本地后续阶段。
+`environment.yml`安装 Python 分析包、BLAST+、MCScanX、三种序列比对器、
+IQ-TREE、gffread、bedtools 与 samtools。HCC 的 BISER 1.4 Conda 包仅提供 Linux
+x86-64 构建，并要求 Python 3.12，因此阶段 03 使用独立的
+`environment-biser-linux.yml`，在 Linux 服务器或 `linux/amd64` 容器中运行。
+已生成的 BISER calls 可直接用于 macOS 上的后续阶段。
 
 ## 术语
 
