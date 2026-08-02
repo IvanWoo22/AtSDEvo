@@ -1,8 +1,53 @@
-### Example user template template
-### Example user template
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
 
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Generated analyses
+results/
+runs/
+logs/
+tmp/
+work/
+*.log
+*.nhr
+*.nin
+*.nsq
+*.ndb
+*.not
+*.ntf
+*.nto
+*.njs
+*.nog
+*.iqtree
+*.state
+*.treefile
+*.ckp.gz
+
+# Large biological inputs generated/downloaded for new runs
+*.fa
+*.fasta
+*.fna
+*.fastq
+*.fq
+*.bam
+*.cram
+*.vcf
+*.bcf
+*.gff
+*.gff3
+*.gtf
+*.pep
+
+# Keep the already-versioned legacy archives for provenance. New large data
+# should be stored externally and described by checksums/manifests.
