@@ -14,7 +14,7 @@ venv/
 *.swp
 
 # Generated analyses
-results/
+/results/
 runs/
 logs/
 tmp/

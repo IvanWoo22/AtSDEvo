@@ -107,7 +107,7 @@ haplotype。
 D 特异 SNP 4,452 个，D/P=2.377。事件层面 D>P 为 62 个、P>D 为 7 个、
 相等 2 个，双侧 sign test \(p=4.10\times10^{-12}\)。
 
-![局部 MSA 扩充流程。A：候选到正式 SNP 终点；B：全事件错配超过 40% 但仍具有局部可比位点的事件；C：三个年龄层的 P/D SNP 密度。](figures/local_MSA_expansion_overview.png)
+图像产物：`figures/local_MSA_expansion_overview.png`（位于大型分析结果目录）。
 
 | 年龄层 | 事件 | callable sites | P SNP | D SNP | D/P | D>P / P>D / tie |
 |---|---:|---:|---:|---:|---:|---:|
@@ -159,7 +159,9 @@ D/P=2.377。说明结果不是某一种 P0 投影算法的特例。
 CDS 中的事件级方向最稳定；其它区域的事件数或成对分母较少，应视为分层描述，
 不能据此宣称某一功能区具有确定的速率机制。
 
-![71 个事件中六类折叠 SNP 谱及按各拷贝 callable 分母计算的基因组区域分层。](local_msa_snp_symmetric_p0/type_and_context/local_MSA_SNP_types_and_context.png)
+图像产物：
+`local_msa_snp_symmetric_p0/type_and_context/local_MSA_SNP_types_and_context.png`
+（位于大型分析结果目录）。
 
 ## 七、为什么 micro-indel 不同步扩充到 71
 

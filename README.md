@@ -17,11 +17,17 @@ P 与派生位置拷贝 D，并以复制前外群同源片段 P0 为祖先参考
 - 事件 bootstrap 的 D/P 95% 置信区间为 1.450–1.879；
 - 1–10 bp 主证据级 micro-indel 为 P=23、D=54。
 
+独立 RepeatMasker 全流程得到 237 个 SNP 主终点事件，P=11,723、D=19,912、
+D/P=1.699；与 GFF 扩展主分析的 D/P=1.644 接近。跨掩膜 RO≥0.50 且均通过
+age-free P/D 的 585 对事件中，P 位点方向一致率为 100%。Micro-indel 仍为
+D>P，但效应量对掩膜和事件边界更敏感。
+
 结果支持 D 分支积累了更多**派生序列变化**。这不等同于 D 具有更高的
 原始突变率，因为选择、基因转换、DNA 修复、功能组成及 P0 可恢复性均可能影响
 观察结果。
 
 详见[当前结果报告](docs/results/current-age-free-results.md)和
+[RepeatMasker 全流程重分析](docs/results/repeatmasker-full-reanalysis.md)，以及
 [分析流程概览](docs/workflow-overview.md)。本地从冻结 MSA 重算可以精确恢复主
 结果；重新执行比对器会出现少量平台相关边界差异，详见
 [本地复现审计](docs/reproducibility-audit-2026-08-02.md)。
@@ -48,7 +54,7 @@ AtSDEvo/
 
 ## 软件依赖
 
-完整流程使用 BISER、BLAST+、MCScanX、MAFFT、MUSCLE5、PRANK，以及用于
+完整流程使用 RepeatMasker、BISER、BLAST+、MCScanX、MAFFT、MUSCLE5、PRANK，以及用于
 增强型祖先状态分析的 IQ-TREE3。Python 汇总依赖 NumPy、SciPy 和 Matplotlib。
 外部程序默认从 `PATH` 解析；也可用 `BISER_BIN`、`MCSCANX_BIN`、
 `BLASTP_BIN`、`MAKEBLASTDB_BIN`、`GFFREAD_BIN` 和 `PYTHON_BIN` 显式指定。
@@ -66,6 +72,8 @@ IQ-TREE、gffread、bedtools 与 samtools。HCC 的 BISER 1.4 Conda 包仅提供
 x86-64 构建，并要求 Python 3.12，因此阶段 03 使用独立的
 `environment-biser-linux.yml`，在 Linux 服务器或 `linux/amd64` 容器中运行。
 已生成的 BISER calls 可直接用于 macOS 上的后续阶段。
+RepeatMasker 只在重新生成独立 RM 掩膜时需要；已有冻结的 `.masked` 与 `.out`
+文件时不影响主环境和下游复算。
 
 ## 术语
 

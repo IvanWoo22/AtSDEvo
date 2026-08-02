@@ -33,6 +33,54 @@ export SD_AGE_FREE_ROOT="$P/15_age_free_pd_sequence_variation"
 `P`中存放参考组、外群资源、中间结果和比对缓存；`CODE`中存放本仓库追踪的
 脚本。完整上游数据须先按`workflow/01`至`workflow/07`准备。
 
+## 0. RepeatMasker 掩膜与 BISER 敏感性
+
+RepeatMasker 数据库体积较大，且版本会影响掩膜结果。当前冻结版本使用
+RepeatMasker 4.2.3、RMBlast 2.14.1+ 和 `CONS-Dfam_withRBRM_3.9`。先将 TAIR12
+转换为全大写，再运行：
+
+```bash
+RepeatMasker -xsmall -species arabidopsis -pa 6 TAIR12.uppercase.fna
+```
+
+已有 `.masked` 和 `.out` 时可直接标准化参考组并比较三种掩膜：
+
+```bash
+python3 $CODE/workflow/01_reference/prepare_repeatmasker_reference.py \
+  --masked-fasta /path/to/TAIR12.uppercase.fna.masked \
+  --repeat-out /path/to/TAIR12.uppercase.fna.out \
+  --output-root $P/16_repeatmasker_biser_pd_reanalysis/reference
+
+python3 $CODE/workflow/01_reference/compare_three_softmasks.py \
+  --reference-dir $P/01_reference \
+  --output-dir $P/01_reference/repeatmasker_arabidopsis/comparison_analysis
+```
+
+BISER 的 Conda 构建仅支持 Linux x86-64。在该环境中运行 RM 分支：
+
+```bash
+export REPEATMASKER_FASTA=/path/to/TAIR12.uppercase.fna.masked
+bash $CODE/workflow/03_sd_discovery/run_repeatmasker_biser.sh
+
+python3 $CODE/workflow/03_sd_discovery/compare_three_mask_biser_runs.py \
+  --project-dir $P \
+  --output-dir $P/03_biser_segmental_duplication/statistics/three_mask_comparison
+```
+
+RM 下游目录建议设为 `$P/16_repeatmasker_biser_pd_reanalysis`。事件规范化脚本的
+`--biser`、`--primary-node-analysis`、`--events`、`--audit` 和 `--output-root`
+参数用于把 RM 分支与 GFF 主结果隔离。完成 P0、SNP 和 micro-indel 重算后比较：
+
+```bash
+python3 $CODE/workflow/12_age_free_analysis/compare_mask_reanalyses.py \
+  --project $P \
+  --gff-root $P/15_age_free_pd_sequence_variation \
+  --rm-root $P/16_repeatmasker_biser_pd_reanalysis
+```
+
+完整冻结参数和结果见
+[RepeatMasker 全流程重分析](results/repeatmasker-full-reanalysis.md)。
+
 ## 1. 不依赖时间分箱的事件与 BISER 同源 core
 
 ```bash

@@ -115,11 +115,18 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument(
+        "--primary-node-analysis",
+        type=Path,
+        help="所选 BISER 分支对应的 call-level 共线性证据目录。",
+    )
     parser.add_argument("--minimum-length", type=int, default=1000)
     parser.add_argument("--thresholds", default="0.25,0.5,0.75")
     args = parser.parse_args()
 
-    old = args.project / "06_sd_age_tracing_preparation/primary_node_analysis"
+    old = args.primary_node_analysis or (
+        args.project / "06_sd_age_tracing_preparation/primary_node_analysis"
+    )
     network = args.output / "network_age_blind"
     membership = read_tsv(network / "event_call_membership.tsv")
     call_rows = read_tsv(old / "call_evidence.threshold_0.5.tsv")

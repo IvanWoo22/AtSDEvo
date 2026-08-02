@@ -191,12 +191,17 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument(
+        "--biser",
+        type=Path,
+        help="覆盖默认的注释扩展 soft-mask BISER 结果路径。",
+    )
     parser.add_argument("--flank", type=int, default=2000)
     parser.add_argument("--thresholds", default="0.25,0.5,0.75")
     args = parser.parse_args()
 
     mcscan = args.project / "05_mcscanx_synteny"
-    biser_path = (
+    biser_path = args.biser or (
         args.project
         / "03_biser_segmental_duplication/runs/annotation_extended_softmask/biser_out"
     )
