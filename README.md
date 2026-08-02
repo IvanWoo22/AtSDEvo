@@ -1,4 +1,4 @@
-# 拟南芥片段重复鉴定与 P/D 非对称序列演化
+# AtSDEvo：拟南芥片段重复鉴定与 P/D 非对称序列演化
 
 本项目用于鉴定拟南芥（*Arabidopsis thaliana*）片段重复
 （segmental duplication, SD）事件，利用外群共线性区分祖先位置保留拷贝
@@ -50,6 +50,13 @@ AtSDEvo/
 增强型祖先状态分析的 IQ-TREE3。Python 汇总依赖 NumPy、SciPy 和 Matplotlib。
 外部程序默认从 `PATH` 解析；也可用 `BISER_BIN`、`MCSCANX_BIN`、
 `BLASTP_BIN`、`MAKEBLASTDB_BIN`、`GFFREAD_BIN` 和 `PYTHON_BIN` 显式指定。
+
+仓库提供名为 `atsdevo` 的 Conda 环境：
+
+```bash
+conda env create -f environment.yml
+conda activate atsdevo
+```
 
 ## 术语
 

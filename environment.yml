@@ -1,4 +1,4 @@
-name: sd-benchmarking
+name: atsdevo
 channels:
   - conda-forge
   - bioconda

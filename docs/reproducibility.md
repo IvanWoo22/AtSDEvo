@@ -3,6 +3,13 @@
 代码仓库与大型分析数据目录分离。以下约定：
 
 ```bash
+conda env create -f environment.yml
+conda activate atsdevo
+```
+
+环境创建完成后，设置代码与数据目录：
+
+```bash
 CODE=/path/to/AtSDEvo
 P=/path/to/TAIR12_outgroup_comparative_genomics
 export SD_PROJECT_ROOT="$P"
