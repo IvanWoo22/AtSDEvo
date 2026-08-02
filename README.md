@@ -22,7 +22,9 @@ P 与派生位置拷贝 D，并以复制前外群同源片段 P0 为祖先参考
 观察结果。
 
 详见[当前结果报告](docs/results/current-age-free-results.md)和
-[分析流程概览](docs/workflow-overview.md)。
+[分析流程概览](docs/workflow-overview.md)。本地从冻结 MSA 重算可以精确恢复主
+结果；重新执行比对器会出现少量平台相关边界差异，详见
+[本地复现审计](docs/reproducibility-audit-2026-08-02.md)。
 
 ## 目录结构
 
@@ -56,7 +58,13 @@ AtSDEvo/
 ```bash
 conda env create -f environment.yml
 conda activate atsdevo
+python workflow/00_environment/check_environment.py --scope downstream
 ```
+
+`environment.yml`安装 Python 分析包、BLAST+、三种序列比对器、IQ-TREE、
+gffread、bedtools 与 samtools。MCScanX 需从官方源码编译；BISER 1.4 的 PyPI
+预编译包仅面向 Linux x86-64，Apple Silicon 上建议在 Linux 服务器或容器中运行
+阶段 03。已生成的 BISER calls 可直接用于本地后续阶段。
 
 ## 术语
 

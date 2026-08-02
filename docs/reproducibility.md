@@ -5,7 +5,13 @@
 ```bash
 conda env create -f environment.yml
 conda activate atsdevo
+python workflow/00_environment/check_environment.py --scope downstream
 ```
+
+环境检查会明确报告缺失工具及其所属阶段。MCScanX 不在 Conda 环境文件中，需按
+官方仓库说明执行 `make`，再将 `MCScanX` 加入 `PATH`；BISER 1.4 在 Apple
+Silicon 上没有官方原生发行包，阶段 03 应在 Linux x86-64 环境运行。阶段 04
+之后可直接使用同步的 BISER 结果，不需要在本机重复运行 BISER。
 
 环境创建完成后，设置代码与数据目录：
 
@@ -115,3 +121,7 @@ python3 $CODE/workflow/12_age_free_analysis/summarize_age_free_results.py
 
 仓库中的当前脚本已移除旧服务器绝对可执行路径。BISER、MCScanX/BLAST、
 PRANK和IQ-TREE默认从`PATH`解析，也可通过脚本参数或`*_BIN`环境变量显式指定。
+
+冻结 MSA 的下游统计可以逐字节复现；从原子序列重新运行比对器时存在少量
+平台相关的 gap 边界差异。复现范围与具体数值见
+[2026-08-02 本地复现审计](reproducibility-audit-2026-08-02.md)。

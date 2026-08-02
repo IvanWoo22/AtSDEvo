@@ -342,8 +342,7 @@ def main() -> None:
     parser.add_argument("--tile-step", type=int, default=200)
     parser.add_argument(
         "--prank",
-        type=Path,
-        default=Path("prank"),
+        default="prank",
         help="PRANK executable (default: resolve 'prank' from PATH)",
     )
     parser.add_argument(
@@ -584,9 +583,11 @@ def main() -> None:
 
     mafft = shutil.which("mafft")
     muscle = shutil.which("muscle")
-    prank = str(args.prank)
-    if not mafft or not muscle or not args.prank.exists():
-        raise SystemExit("MAFFT, MUSCLE5, and hvnlr PRANK are required")
+    prank = shutil.which(args.prank) or (
+        args.prank if Path(args.prank).is_file() else None
+    )
+    if not mafft or not muscle or not prank:
+        raise SystemExit("MAFFT, MUSCLE5, and PRANK are required")
     atom_lookup = {str(atom["atom_id"]): atom for atom in atoms}
     raw_calls: dict[tuple[str, str], list[dict[str, object]]] = {}
     for mode in ("MAFFT_LINSI", "MUSCLE5"):

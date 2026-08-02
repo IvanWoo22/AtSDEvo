@@ -1,13 +1,13 @@
 name: atsdevo
+# MCScanX 与 BISER 需按平台单独安装，详见 docs/reproducibility.md。
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - python>=3.11
+  - python=3.11
   - numpy
   - scipy
   - matplotlib
-  - biopython
   - blast>=2.15
   - mafft>=7.5
   - muscle>=5

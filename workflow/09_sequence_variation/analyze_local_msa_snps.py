@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import csv
 import math
+import shutil
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -408,8 +409,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--prank",
-        type=Path,
-        default=Path("prank"),
+        default="prank",
         help="PRANK executable (default: resolve 'prank' from PATH)",
     )
     parser.add_argument(
@@ -418,6 +418,11 @@ def main() -> None:
         help="Optional directory containing reusable fixed-tree PRANK alignments",
     )
     args = parser.parse_args()
+    prank = shutil.which(args.prank) or (
+        args.prank if Path(args.prank).is_file() else None
+    )
+    if not prank:
+        raise SystemExit("PRANK was not found; add it to PATH or pass --prank")
     args.output.mkdir(parents=True, exist_ok=True)
 
     pilot = (
@@ -489,7 +494,7 @@ def main() -> None:
             best = Path(f"{prefix}.best.fas")
             if not best.exists():
                 command = [
-                    str(args.prank),
+                    prank,
                     f"-d={args.atom_root / f'atomic_haplotypes/{atom_id}.fa'}",
                     f"-t={args.atom_root / f'atomic_haplotypes/{atom_id}.tree.nwk'}",
                     f"-o={prefix}",
